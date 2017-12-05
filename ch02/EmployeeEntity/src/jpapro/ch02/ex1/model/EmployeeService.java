@@ -61,8 +61,4 @@ public class EmployeeService
         return query.getResultList();
     }
     
-    public void removeEmployee(int id)
-    {
-        
-    }
 }
