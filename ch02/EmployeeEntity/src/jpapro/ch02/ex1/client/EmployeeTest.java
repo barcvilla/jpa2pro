@@ -21,8 +21,11 @@ public class EmployeeTest
 {
     public static void main(String[] args) 
     {
+        // en el entorno Java SE usamos la clase Persistence
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("EmployeeService");
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = emf.createEntityManager(); // devolvemos un EntityManager
+        
+        // creamos la unidad de persistencia EmployeeService
         EmployeeService service = new EmployeeService(em);
         
         // creamos y almacenamos  un empleado
