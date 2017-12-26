@@ -29,7 +29,7 @@ public class EmployeeTest
         EmployeeService service = new EmployeeService(em);
         
         // creamos y almacenamos  un empleado
-        em.getTransaction().begin();
+        em.getTransaction().begin(); // transaccion aplicable en entorno SE
         Employee emp = service.createEmployee(158, "John Doe", 45000);
         em.getTransaction().commit();
         System.out.println("Almacenado " + emp );
