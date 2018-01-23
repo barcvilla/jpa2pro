@@ -8,7 +8,8 @@ package examples.stateless;
 import javax.ejb.Stateless;
 
 /**
- *
+ * Clase que implementa la interface comercial HelloService. La anotacion @Stateless marca esta clase como un bean
+ * de session sin estado. Esta es una clase regular que simplemente resulta ser un EJB 
  * @author barcvilla
  */
 @Stateless
