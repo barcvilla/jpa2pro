@@ -26,6 +26,8 @@ import javax.servlet.http.HttpServletResponse;
 )
 public class LoggerServlet extends HttpServlet
 {
+    private static final long serialVersionUID = 987655432L;
+    
     private final String TITLE = "Chapter 3: Stateless Session Bean Lifecycle Example";
     private final String DESCRIPTION =
         "This example demonstrates the basic use of lifecycle callbacks to initialize a Stateless Session Bean. </br>" +
