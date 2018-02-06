@@ -7,11 +7,13 @@ package examples.stateless;
 
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.ejb.Stateless;
 
 /**
  *
  * @author barcvilla
  */
+@Stateless
 public class LoggerBean 
 {
     private Logger logger;
