@@ -5,15 +5,18 @@
  */
 package jpapro.ch02.ex1.model;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author barcvilla
  */
 @Entity
-public class Employee 
+@Table(name = "employee")
+public class Employee implements Serializable
 {
     @Id
     private int id;
