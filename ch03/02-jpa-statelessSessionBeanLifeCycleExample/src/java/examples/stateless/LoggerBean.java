@@ -18,6 +18,11 @@ public class LoggerBean
 {
     private Logger logger;
     
+    /**
+     * El server llama PostConstruct tan pronto como el server ha completado la inicializacion todos los servicios
+     * containers para el bean. Este reemplaza el Constructor como la ubicacion para la inicializacion de la logica
+     * ya que es solo aqui que los servicios de contenedor se garantiza la disponibilidad.
+     */
     @PostConstruct
     private void init()
     {

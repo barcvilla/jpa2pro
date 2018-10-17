@@ -47,7 +47,10 @@ public class OrderBrowser
     {
         acquireConnection();
     }
-    
+     
+    /**
+     * Preparamos el bean para la serializacion. Luego que el bean ha sido activado el servidor invocara @PostActive
+     */
     @PrePassivate
     void passivate()
     {
