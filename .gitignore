@@ -15,3 +15,5 @@
 /ch03/08-jpa-dependencylookup/dist/
 /ch03/10-jpa-fieldinjection/nbproject/private/
 /ch03/10-jpa-fieldinjection/build/
+/ch03/11-jpa-setterinjection/nbproject/private/
+/ch03/11-jpa-setterinjection/build/
