@@ -10,3 +10,8 @@
 /ch03/05-jpa-statefulSessionBeanLifeCycleExample/nbproject/private/
 /ch03/06-jpa-SingletonExample/nbproject/private/
 /ch03/06-jpa-SingletonExample/build/
+/ch03/08-jpa-dependencylookup/nbproject/private/
+/ch03/08-jpa-dependencylookup/build/
+/ch03/08-jpa-dependencylookup/dist/
+/ch03/10-jpa-fieldinjection/nbproject/private/
+/ch03/10-jpa-fieldinjection/build/
