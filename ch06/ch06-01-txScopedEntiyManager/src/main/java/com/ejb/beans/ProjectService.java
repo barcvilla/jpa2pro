@@ -21,6 +21,11 @@ public class ProjectService {
     @PersistenceContext(unitName = "EmployeeService")
     EntityManager em;
     
+    /**
+     * 1. Buscamos una instancia de Employee y Project
+     * @param empId
+     * @param projectId 
+     */
     public void assignEmployeeToProject(int empId, int projectId)
     {
         Project project = em.find(Project.class, projectId);

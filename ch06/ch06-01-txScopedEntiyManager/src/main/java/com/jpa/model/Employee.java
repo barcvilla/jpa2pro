@@ -26,8 +26,6 @@ public class Employee implements Serializable {
     private int id;
     private String name;
     private long salary;
-    @Temporal(TemporalType.DATE)
-    private Date startDate;
     @ManyToMany
     private Collection<Project> projects;
 
@@ -49,10 +47,6 @@ public class Employee implements Serializable {
 
     public long getSalary() {
         return salary;
-    }
-
-    public Date getStartDate() {
-        return startDate;
     }
 
     public Collection<Project> getProjects() {
