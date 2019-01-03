@@ -23,7 +23,7 @@ public class EmployeeService {
     
     public List<Employee> findAllEmployees()
     {
-        return em.createQuery("select e from employee e", Employee.class).getResultList();
+        return em.createQuery("select e from Employee e", Employee.class).getResultList();
     }
     
     public List<Department> findAllDepartments()

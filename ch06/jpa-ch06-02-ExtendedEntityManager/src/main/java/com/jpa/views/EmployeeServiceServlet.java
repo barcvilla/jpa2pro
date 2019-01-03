@@ -50,9 +50,10 @@ public class EmployeeServiceServlet extends HttpServlet {
                 throw new ServletException(e);
             }
         }
-        **/
+        
         deptManager = (DepartmentManager) request.getSession().getAttribute("DepartmentManager");
         request.getSession().setAttribute("DepartmentManager", deptManager);
+        **/
 
         // process request
         String action = request.getParameter("action");
@@ -68,8 +69,8 @@ public class EmployeeServiceServlet extends HttpServlet {
             deptManager.setName(request.getParameter("name"));
             printManagementActions(out, deptManager);
         } else if (action.equals("Finished")) {
-            deptManager.finished();
-            request.getSession().removeAttribute("DepartmentManager");
+            //deptManager.finished();
+            //request.getSession().removeAttribute("DepartmentManager");
             printInitAction(out);
         }
 
@@ -104,7 +105,7 @@ public class EmployeeServiceServlet extends HttpServlet {
     }
 
     private void printInitAction(PrintWriter out) {
-        out.println("<form action=\"EmployeeServlet\" method=\"POST\">");
+        out.println("<form action=\"EmployeeServiceServlet\" method=\"POST\">");
         out.println("<h3>Manage Department</h3>");
         out.println("<table><tbody>");
         out.println("<tr><td>Department Id:</td><td><input type=\"text\" name=\"deptId\"/>(int)</td></tr>"
@@ -120,7 +121,7 @@ public class EmployeeServiceServlet extends HttpServlet {
         out.print("Managing " + deptManager.getDepartment() + " with "
                 + deptManager.getDepartment().getEmployees().size() + " employees.<br>");
 
-        out.println("<form action=\"EmployeeServlet\" method=\"POST\">");
+        out.println("<form action=\"EmployeeServiceServlet\" method=\"POST\">");
         out.println("<h3>Add Employee to Department</h3>");
         out.println("<table><tbody>");
         out.println("<tr><td>Employee Id:</td><td><input type=\"text\" name=\"empId\"/>(int)</td>");
