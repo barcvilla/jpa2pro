@@ -18,6 +18,12 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class EmployeeService {
+    /**
+     * Entity Transaction Scope
+     * Asumiendo que no hay una transaccion activda desde el cliente, cada metodo del bean start y commit una nueva
+     * transaccion ya que el atributo de la transaccion por defecto para cada metodo es REQUIRED. Debido a que hay
+     * una nueva transaccion para cada metodo, el entity manager usara un persistence context diferente cada vez.
+     */
     @PersistenceContext(unitName = "EmployeeService")
     EntityManager em;
     
