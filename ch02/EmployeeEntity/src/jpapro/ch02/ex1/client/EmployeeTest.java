@@ -14,7 +14,14 @@ import jpapro.ch02.ex1.model.EmployeeService;
 import jpapro.ch02.ex1.model.Employee;
 
 /**
- *
+ * Ejemplo de un Entity Manager Application-Managed, este nombre viene del hecho de que la aplicacion, en lugar del
+ * contenedor maneja el ciclo de vida del entity manager. Note que todos los entities manager abiertos, ya sea
+ * container-manager o application-managed estan asociadas con la instancia EntityManagerFactory. El factory usado
+ * para crear el entity manager puede ser accedido desde la llamada al metodo getEntityManagerFactory() de la 
+ * interface EntityManager.
+ * 
+ * Aunque se espera que la mayoria de aplicaciones sean desarrolladas utilizando Entity Manager container-managed, pero
+ * entity manager application manager aun tiene un rol que jugar. 
  * @author barcvilla
  */
 public class EmployeeTest 

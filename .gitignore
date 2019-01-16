@@ -20,3 +20,6 @@
 /ch03/12-jpa-RRHH/target/
 /ch06/ch06-01-txScopedEntiyManager/target/
 /ch06/jpa-ch06-02-ExtendedEntityManager/target/
+/ch06/jpa-ch06-03-ExtendedEntityManager/target/
+/ch06/jpa-ch06-05-AppManaged-EntityManager/nbproject/private/
+/ch06/jpa-ch06-05-AppManaged-EntityManager/build/

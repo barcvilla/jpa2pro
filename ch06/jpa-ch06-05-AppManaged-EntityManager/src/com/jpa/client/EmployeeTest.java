@@ -37,7 +37,7 @@ public class EmployeeTest
         
         // creamos y almacenamos  un empleado
         em.getTransaction().begin(); // transaccion aplicable en entorno SE
-        Employee emp = service.createEmployee(158, "John Doe", 45000);
+        Employee emp = service.createEmployee(159, "Paul Doe", 50000);
         em.getTransaction().commit();
         System.out.println("Almacenado " + emp );
         
@@ -54,7 +54,7 @@ public class EmployeeTest
         
         // actualizamos un empleado
         em.getTransaction().begin();
-        emp = service.raiseEmployeeSalary(158, 1000);
+        emp = service.raiseEmployeeSalary(159, 1000);
         em.getTransaction().commit();
         System.out.println("Empleado actualizado: " + emp);
         
