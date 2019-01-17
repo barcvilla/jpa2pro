@@ -22,7 +22,7 @@ public class AuditService {
     @PersistenceContext(unitName = "EmployeeService")
     private EntityManager em;
     
-    private void logTransaction(int empId, String action)
+    public void logTransaction(int empId, String action)
     {
         // verificamos el id del empleado si es valido
         if(em.find(Employee.class, empId) == null)
