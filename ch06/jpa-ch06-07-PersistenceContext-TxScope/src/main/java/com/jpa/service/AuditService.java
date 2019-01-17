@@ -14,7 +14,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- *
+ * Audit Service es un ejemplo de la propagacion del contexto de persistencia transactions scope, almacenamos
+ * la informacion exitosa al completar una transaccion
  * @author PC
  */
 @Stateless
