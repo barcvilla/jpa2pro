@@ -30,9 +30,30 @@ public class EmployeeService {
     @EJB
     AuditService audit;
     
+    /**
+     * Aunque el nuevo empleado creado no esta aun en la BD, audit bean puede encontrar la entidad y verificar si esta
+     * existe. Esto se realiza debido a que los dos bean estan compartiendo el mismo contexto de persistencia.
+     * El atributo de la transaccion del metodo createEmployee() es REQUIRED por defecto ya que no se especifica
+     * un atributo expicitamente. 
+     * El contenedor garantiza que una transaccion se haya iniciado antes de que el metodo es invocado. Cuando
+     * se llama al metodo persist() en el entity manager, el contenedor verifica si un contexto de persistencia ya esta
+     * asociado con la transaccion. Asumamos que en este caso, que esta fue la primera operacion del entity manager
+     * en la transaccion, asi que el contenedor crea un nuevo contexto de persistencia y la marca como propagada.
+     * 
+     * Cuando el metodo logTransaction() inicia, se lleva a cabo el metodo find() en el entity manager de AuditService
+     * Se nos garantiza estar en una transaccion ya que el atributo de la transaccion es REQUIRED y el la transaccion
+     * container-management del metodo createEmployee() ha sido extendido a este metodo por el contenedor.
+     * Cuando el metodo fin() es invocado, el contenedor nuevamente verifica por un contexto de persistencia activo. Este
+     * encuentra el unico creado en el metodo createEmployee() y utiliza ese contexto de persistencia para buscar por
+     * la entidad. Debido a la nueva instancia del empleado creada es manejada por el contexto de persistencia,
+     * este es retornado satisfactoriamente.
+     * @param emp 
+     */
     public void createEmployee(Employee emp)
     {
+        // creamos un empleado
         em.persist(emp);
+        // creamos un log event
         audit.logTransaction(emp.getId(), "created employee");
     }
     
