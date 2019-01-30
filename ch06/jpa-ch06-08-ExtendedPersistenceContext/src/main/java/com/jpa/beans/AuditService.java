@@ -20,6 +20,15 @@ public class AuditService {
     @PersistenceContext(unitName = "EmployeeService")
     private EntityManager em;
     
+    /**
+     * Este metodo hereda el contexto de transaccion desde addEmployee() ya que su atributo de transaccion es el por
+     * defecto REQUIRED, y una transaccion esta activa durante la llamada al metodo addEmployee(). Cuando el metodo
+     * find() es invocado, el entity manager transaction-scope verifica que exista un contexto de persistencia activo
+     * y encontrara el contexto de persistencia extendido del DeparmentManagement. Este entonces usara este contexto
+     * de persistencia para ejecutar la operacion. Todas las entidades administradas del contexto de persistencia extendido
+     * sera visible al entity manager transacion scope
+     *  
+     */
     public void logTransaction(int empId, String action)
     {
         // verificamos si el numero id es valido

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jpa.beans;
+package com.jpa.service;
 
 import com.jpa.model.Department;
 import com.jpa.model.Employee;
@@ -22,16 +22,15 @@ import javax.persistence.PersistenceContextType;
  */
 @Stateful
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-public class DepartmentManagement {
-    @PersistenceContext(unitName = "EmployeeService", type = PersistenceContextType.EXTENDED)
+public class DepartmentManager {
+
+    @PersistenceContext(unitName = "EmployeeService",type = PersistenceContextType.EXTENDED)
     EntityManager em;
     Department dept;
-    
     @EJB
     AuditService audit;
-    
-    public void init(int deptId)
-    {
+
+    public void init(int deptId) {
         dept = em.find(Department.class, deptId);
     }
 
@@ -39,27 +38,33 @@ public class DepartmentManagement {
         return dept;
     }
 
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public String getName() {
+        return dept.getName();
+    }
+
     public void setName(String name) {
         dept.setName(name);
     }
-    
-    /**
-     * Este metodo tiene un atributo de transaccion de tipo REQUIRED. Ya que le contenedor se asocia a contexto de 
-     * persistencia extendido, el contexto de persistencia extendido almacenado en el session bean estara inmediatamente
-     * asociado con la transaccion cuando la llamada al metodo inicia. esto causa que la relacion entre las entidades
-     * administradas Department y Employee sean persistido en la BD cuando la transaccion hace commits. Esto tambien
-     * sisgnifica que el contexto de persistencia extendido estara ahora compartido por otro contexto de persistencia
-     * transaction-scoped usado en metodo llamado desde addEmployee()
-     *  
-     */
-    public void addEmployee(int empId)
-    {
+
+    public void addEmployee(int empId) {
         Employee emp = em.find(Employee.class, empId);
         dept.getEmployees().add(emp);
         emp.setDepartment(dept);
-        audit.logTransaction(empId, "added to department " + dept.getName());
+        audit.logTransaction(emp.getId(),
+                "added to department " + dept.getName());
     }
-    
+
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void addEmployee2(int empId) {
+        Employee emp = em.find(Employee.class, empId);
+        dept.getEmployees().add(emp);
+        emp.setDepartment(dept);
+        audit.logTransaction(emp.getId(),
+                "added to department " + dept.getName());
+    }
+
     @Remove
-    public void finished(){}
+    public void finished() {
+    }
 }
