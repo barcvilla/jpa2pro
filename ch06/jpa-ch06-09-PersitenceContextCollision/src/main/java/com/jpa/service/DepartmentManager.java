@@ -17,7 +17,11 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 
 /**
- *
+ * Atributo de transaccion REQUIRES_NEW para forzar una nueva transaccion de forma predeterminada cuando se invoca
+ * un metodo de negocio. Para el metodo getName() no necesitamos una nueva transaccion porque no se realizan cambios,
+ * por lo que se ha establecido NOT_SUPPORTED. Esto suspendera la transaccion actual, pero no dara lugar a que se
+ * cree una nueva transaccion. Con estos cambios, se puede acceder al bean DepartmentManager en cualquier situacion,
+ * incluso si ya existe  un contexto de persistencia activo.
  * @author PC
  */
 @Stateful
