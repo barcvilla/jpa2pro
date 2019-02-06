@@ -22,6 +22,13 @@ import javax.persistence.PersistenceContextType;
  * por lo que se ha establecido NOT_SUPPORTED. Esto suspendera la transaccion actual, pero no dara lugar a que se
  * cree una nueva transaccion. Con estos cambios, se puede acceder al bean DepartmentManager en cualquier situacion,
  * incluso si ya existe  un contexto de persistencia activo.
+ * 
+ * Finalmente, la ultima opcion a considerar una entity manager application-managed en lugar de un
+ * entity manager extended. Si no hay necesidad de propagar el contexto de persistencia, el entity manager extended
+ * no esta adicionando mucho valor sobre el entity manager applicaction-managed. El stateful session bean puede crear
+ * de forma segura un entity manager application managed, almacenarlo en la instancia del bean y usarlo para las 
+ * operaciones de persistencia sin tener que preocuparse sobre si una transaccion activa ya ha sido propagada al
+ * contexto de persistencia 
  * @author PC
  */
 @Stateful

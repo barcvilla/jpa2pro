@@ -26,3 +26,4 @@
 /ch06/jpa-ch06-06-ApplicationManager-EE/target/
 /ch06/jpa-ch06-07-PersistenceContext-TxScope/target/
 /ch06/jpa-ch06-09-PersitenceContextCollision/target/
+/ch06/jpa-ch06-10-PersistenceContextInheritance/target/
