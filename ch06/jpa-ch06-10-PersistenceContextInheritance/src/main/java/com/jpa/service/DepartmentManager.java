@@ -27,6 +27,11 @@ import javax.persistence.PersistenceContextType;
  * DepartmentManager retorna un bean EmployeeManager desde el metodo getManager() a fin de representar
  * al manager del departamento. el bean EmployeeManager es injectado y luego inicializado durante la invocacion
  * del metodo init()
+ * 
+ * Cuando un stateful session bean con un contexto de persistencia extendido crea otro stateful session bean que tambien
+ * utiliza un contexto de persistencia extendido, entonces el hijo hereda el contexto de persistencia del padre. El bean
+ * EmployeeManager hereda del contexto de persistencia del bean DepartmentManager cuando este es injectado en la instancia
+ * DepartmentManager. Los dos beans ahora pueden ser usados juntos en la misma transaccion
  * @author PC
  */
 @Stateful
