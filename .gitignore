@@ -28,3 +28,4 @@
 /ch06/jpa-ch06-09-PersitenceContextCollision/target/
 /ch06/jpa-ch06-10-PersistenceContextInheritance/target/
 /ch06/jpa-ch06-11-ApplicationManagedJTA/target/
+/ch06/jpa-ch06-12-SharingApplicationEntityManager/target/
