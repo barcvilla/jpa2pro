@@ -24,7 +24,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.transaction.UserTransaction;
 
 /**
- *
+ * Si el contexto de persistencia llega a ser sincronizado con una transaccion, los cambios aun sera escritos en la
+ * base de datos cuando la transaccion commits, incluso si el entity manager esta cerrado. Esto permite a los entity
+ * managers sea cerrado en el punto donde son creados, remueve la necesidad de preocuparse por cerrarlos luego que la
+ * transaccion termine. Note que cerrar el entity manager application-managed previene de un uso futuro del entity manager
+ * Solo el contexto de persistencia es el que continua hasta que la transaccion sea completa.
  * @author PC
  */
 @WebServlet(name = "EmployeeServlet", urlPatterns = {"/EmployeeServlet"})
@@ -64,6 +68,7 @@ public class EmployeeServlet extends HttpServlet {
             //EntityManager em = null;
             try {
                 em.getTransaction().begin();
+                //tx.begin();
                 //em = emf.createEntityManager();
                 EmpService service = new EmpService(em);
                 // process request
@@ -73,13 +78,13 @@ public class EmployeeServlet extends HttpServlet {
                             request.getParameter("name"),
                             parseLong(request.getParameter("salary")));
                     out.println("Created " + emp);
-                    em.getTransaction().commit();
+                    //em.getTransaction().commit();
                 } 
                 else if (action.equals("Remove")) {
                     String id = request.getParameter("removeId");
                     service.removeEmployee(parseInt(id));
                     out.println("Removed Employee with id: " + id);
-                    em.getTransaction().commit();
+                    //em.getTransaction().commit();
                 } 
                 else if (action.equals("Update")) {
                     String id = request.getParameter("raiseId");
@@ -87,7 +92,7 @@ public class EmployeeServlet extends HttpServlet {
                             parseInt(id),
                             parseLong(request.getParameter("raise")));
                     out.println("Updated " + emp);
-                    em.getTransaction().commit();
+                    //em.getTransaction().commit();
                 } 
                 else if (action.equals("Find")) {
                     Employee emp = service.findEmployee(
@@ -110,6 +115,14 @@ public class EmployeeServlet extends HttpServlet {
                 throw new ServletException(e);
             } finally {
                 em.close();
+                try
+                {
+                    em.getTransaction().commit();
+                }
+                catch(Exception e)
+                {
+                    throw new ServletException(e);
+                }
             }
 
             printHtmlFooter(out);
