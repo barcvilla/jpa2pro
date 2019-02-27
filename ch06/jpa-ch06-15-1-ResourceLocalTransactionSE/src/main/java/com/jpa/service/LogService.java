@@ -12,7 +12,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /**
- *
+ * RECURSO - TRANSACCION LOCALES
  * @author PC
  */
 @Stateless
@@ -24,7 +24,7 @@ public class LogService {
     public void logAccess(int userId, String action) {
         try {
             MyLogRecord lr = new MyLogRecord(userId, action);
-            em.getTransaction().begin();
+            em.getTransaction().begin(); // iniciamos un nuevo recurso - transaccion local
             em.persist(lr);
             em.getTransaction().commit();
         }
