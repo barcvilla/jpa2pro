@@ -9,12 +9,8 @@ import com.jpa.domain.LogRecord;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
 
-/**
- *
- * @author PC
- */
+
 @Stateless
 public class LogServiceEE {
     @PersistenceContext(unitName = "Logging")
