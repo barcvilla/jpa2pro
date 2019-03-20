@@ -26,6 +26,12 @@ public class LogRecord implements Serializable{
     private String action;
     
     public LogRecord(){}
+    
+    public LogRecord(int empId, String action)
+    {
+        this.id = empId;
+        this.action = action;
+    }
 
     public int getId() {
         return id;
