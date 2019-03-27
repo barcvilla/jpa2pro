@@ -28,7 +28,14 @@ import javax.ejb.Remove;
  * de persistencia con la transaccion. Como en el caso del transaction bean-managed tan pronto como UserTransaction.begin()
  * es invocado dentro de un metodo bean el contenedor intercepta la llamada y realiza la misma asociacion.
  * 
+ * Ya que un entity manager transaction-scope utilizara un contexto de persistencia existente asociado con la transaccion
+ * antes que se creara un nuevo contexto de persistencia, es posible compartir un persistence contexted extended con otro
+ * entity manager transaction-scope. Mientras que el contexto de persistencia extendido sea propagado antes de que cualquier
+ * entity manager transaction-scope sea accedido, el mismo contexto de persistencia extendido sera compartido por todos los
+ * componentes.
  * 
+ * Similar al ejemplo 15-6 auditoria EmployeeService bean, consideremos el mismo cambio hecho al stateful session bean
+ * DepartmentManager para auditar cuando el empleado es adicionado al department.
  * @author PC
  */
 @Stateful
@@ -56,6 +63,21 @@ public class DepartmentManager {
         dept.setName(name);
     }
     
+    /**
+     * El metodo addEmployee() utiliza el atributo de transaccion por defecto REQUIRED, ya que el contenedor rapidamente
+     * asocia el contexto de persistencia extendido, el contexto de persistencia extendido almacenado en el session bean
+     * sera inmediatamente asociado con la transaccion cuando la llamada al metodo se inicie. Esto causara que la relacion
+     * entre las entidades managed Department y Employee sean persistido en la base de datos cuando la transaccion commits.
+     * Esto tambien significa que el contexto de persistencia extendido ahora sera compartido por otro contexto de persistencia
+     * transaction-scoped usado en la llamada de metodos desde addEmployee()
+     * 
+     * logTransaction() en este ejemplo heredara el transaction-context del addEmployee() ya que su atributo de transaccion es
+     * el default REQUIRED, y una transaccion esta activa durante la llamada a addEmployee(). cuando el metodo find() es 
+     * invocado, el entity manager transaction-scoped verifica que exista un contexto de persistencia activo y encontrara
+     * el contexto de persistencia del DepartmentManager. Este, utilizara este contexto de persistencia para ejecutar la
+     * operacion. Todas las entidades manejadas del contxto de persistencia extendido llegan a ser visibles para el
+     * entity manager transaction-scoped
+     */
     public void addEmployee(int empId)
     {
         Employee emp = em.find(Employee.class, empId);
