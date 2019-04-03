@@ -29,7 +29,29 @@ import javax.ejb.Remove;
  * stateless y la llamada al metodo del session bean stateful fallara. Puede solo existir  un contexto de persistencia activo
  * para una transaccion.
  * 
+ * Mientras que la propagacion del contexto de persistencia extendido es util si un session bean stateful con un contexto
+ * de persistencia extendido es el primer EJB a ser invocado en una cadena de llamado. esto limita la situacion en la cual
+ * otros componentes pueden hacer llamadas al session bean stateful si ellos tambien usan entity managers. Esto podria o
+ * no ser comun dependiendo de la arquitectura de la app, pero algo a tener en mente cuando planificamos las dependencias de
+ * componentes. 
  * 
+ * Una forma de trabajar con este problema es cambiar el atributo de transaccion por defecto para el session bean stateful
+ * que utiliza el contxto de persistencia extendido. Si el atributo de transaccion por defecto es REQUIRED_NEW, cualquier
+ * transaccion activa sera suspendida antes que el metodo del session bean stateful inicie, permitiendo asociar
+ * su contexto de persistencia extendido con la nueva transaccion. Esta es una buena estrategia si el session bean 
+ * stateful llama a otro session bean stateless y necesita ser propagado el contexto de persistencia. Note que el uso
+ * excesivo de REQUIRES_NEW transaction puede ocasionar problemas de desempeno ya que muchas transacciones de lo normal
+ * seran creadas, y transaccion activa sera suspendido y resumido.
+ * 
+ * Si session bean stateful no llama a otro session bean y no necesita que se propague si contexto de persistencia, un
+ * tipo de atributo de transaccion de NOT_SUPPORTED puede ser valioso. en este caso, cualquier transaccion activa sera
+ * suspendida antes que la llamada al metodo del sessio bean stateful inicie, pero no sera iniciada una nueva transaccion.
+ * 
+ * En este ejemplo usamos el atributo de transaccion REQUIRES_NEW para forzar una nueva transaccion por defecto cuando
+ * un metodo del negocio es invocado. Para el metodo getName() no necesitamos una nueva transaccion porque ningun cambio
+ * es realizado, por ello NOT_SUPPORTED. Esto suspendera la actual transaccion, pero no resultara en una nueva transaccion
+ * creada. Con estos cambios, el bean DepartmentManager puede ser accedido en cualquier situacion, inluso si hay
+ * un contexto de persistencia activo
  */
 @Stateful
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
