@@ -40,3 +40,4 @@
 /ch06/jpa-ch06-15-8-PersistenceContextCollision/target/
 /ch06/jpa-ch06-15-9-PersistenceContextInheritance/target/
 /ch06/jpa-ch06-15-10-PersistenceContext-ApplicationManaged/target/
+/ch06/jpa-ch06-15-11-Sharing-EntityManager-ApplicationManaged/target/
