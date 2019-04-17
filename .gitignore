@@ -41,3 +41,5 @@
 /ch06/jpa-ch06-15-9-PersistenceContextInheritance/target/
 /ch06/jpa-ch06-15-10-PersistenceContext-ApplicationManaged/target/
 /ch06/jpa-ch06-15-11-Sharing-EntityManager-ApplicationManaged/target/
+/ch06/jpa-ch06-16-PersistingWithRelationship/target/
+/ch06/jpa-ch06-17-PersistingWithRelationShipUsingReferences/target/

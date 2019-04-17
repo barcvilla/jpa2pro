@@ -14,7 +14,8 @@ import javax.persistence.Persistence;
 import javax.persistence.TemporalType;
 
 /**
- *
+ * Aplicacion que utiliza EntityTransaction Api para realizar un cambio de password para los usuarios quienes fallaron
+ * actualizar su password antes que la fecha expire.
  * @author PC
  */
 public class TestPassword {
@@ -29,7 +30,7 @@ public class TestPassword {
             Calendar cal = Calendar.getInstance();
             cal.add(Calendar.DAY_OF_YEAR, -maxAge);
             
-            em.getTransaction().begin();
+            em.getTransaction().begin(); //iniciamos una nueva resource transaction
             List<User> expired = em.createQuery("select u from User u where u.lastChange <= ?1", User.class)
                     .setParameter(1, cal, TemporalType.DATE)
                     .getResultList();
