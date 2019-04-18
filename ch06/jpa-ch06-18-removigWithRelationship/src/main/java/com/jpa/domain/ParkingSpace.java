@@ -25,8 +25,6 @@ public class ParkingSpace implements Serializable{
     
     @OneToOne(mappedBy = "parkingSpace")
     private Employee employee;
-    
-    public ParkingSpace(){}
 
     public int getId() {
         return id;

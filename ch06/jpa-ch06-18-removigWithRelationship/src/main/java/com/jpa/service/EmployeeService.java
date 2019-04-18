@@ -13,7 +13,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- *
+ * El mantenimiento de las relaciones entre entidades es responsabilidad de la aplicacion. Casi todo problema relacionado
+ * con remover una entidad siempre tiene que ver con el mantenimiento de las relaciones entre entidades. Si la entidad a 
+ * ser removida es el objetivo de la llave foranea en otras tablas, esta llavea foraneas debens er limpiadas para una
+ * eliminacion exitosa.
+ * Una entidad solo puede ser removida si es administrada por un contexto de persistencia. Esto significa que Entity Manager
+ * Transaction-Scoped puede ser usado para remover una entidad solo si existe una transaccion activa. Invoca al metodo 
+ * remove() cuando no hay una transaccion produce una excepcion TrasactionRequiredExecption. 
  * @author PC
  */
 @Stateless
@@ -30,6 +36,13 @@ public class EmployeeService {
         em.remove(ps);
     }
     
+    /**
+     * Cuando la transaccion realiza un commit, vemos la sentencia delete para la tabla ParkingSpace, pero luego
+     * obtenemos una excepcion ya que se viola la restriccion foreign key ya que existen una integridad referencial entre
+     * employee y parking space. Para corregir el problema debemos explicitamente debemo colocar en nulo el atributo
+     * parkingSpace de la entidad employee (como se demuestra en el metodo removeParkingSpace()) 
+     * antes que la transaccion haga commit.
+     */
     public void removeParkingSpaceWithFailure(int empId)
     {
         //olvidamos aplicar null value la relacion causara a una falla en db

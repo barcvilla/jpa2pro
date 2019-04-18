@@ -51,7 +51,6 @@ public class EmployeeServiceServlet extends HttpServlet {
             {
                 if(action.equals("Remove"))
                 {
-                    System.out.println("id: " + request.getParameter("empId"));
                     empService.removeParkingSpace(parseInt(request.getParameter("empId")));
                 }
                 else if(action.equals("RemoveWithFailure"))

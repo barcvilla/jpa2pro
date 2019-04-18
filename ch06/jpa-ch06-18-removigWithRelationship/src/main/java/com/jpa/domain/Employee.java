@@ -27,8 +27,6 @@ public class Employee implements Serializable{
     @JoinColumn(name = "pspace_id")
     private ParkingSpace parkingSpace;
     
-    public Employee(){}
-
     public int getId() {
         return id;
     }
