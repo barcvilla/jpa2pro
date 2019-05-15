@@ -6,7 +6,7 @@
 package com.jpa.domain;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -25,7 +25,7 @@ public class Employee implements Serializable{
     private String name;
     
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime lastAccessTime;
+    private Date lastAccessTime;
 
     public int getId() {
         return id;
@@ -43,11 +43,11 @@ public class Employee implements Serializable{
         this.name = name;
     }
 
-    public LocalDateTime getLastAccessTime() {
+    public Date getLastAccessTime() {
         return lastAccessTime;
     }
 
-    public void setLastAccessTime(LocalDateTime lastAccessTime) {
+    public void setLastAccessTime(Date lastAccessTime) {
         this.lastAccessTime = lastAccessTime;
     }
 

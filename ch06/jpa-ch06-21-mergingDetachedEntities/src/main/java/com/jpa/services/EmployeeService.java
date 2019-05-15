@@ -7,6 +7,7 @@ package com.jpa.services;
 
 import com.jpa.domain.Employee;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -28,7 +29,7 @@ public class EmployeeService {
             throw new IllegalArgumentException("Unknow employee id: " + emp.getId());
         }
         Employee managedEmp = em.merge(emp);
-        managedEmp.setLastAccessTime(LocalDateTime.now());
+        managedEmp.setLastAccessTime(new Date());
     }
     
     public void updateEmployeeIncorrect(Employee emp)
@@ -38,7 +39,7 @@ public class EmployeeService {
             throw new IllegalArgumentException("Unknown employee id: " + emp.getId());
         }
         em.merge(emp);
-        emp.setLastAccessTime(LocalDateTime.now());
+        emp.setLastAccessTime(new Date());
     }
     
     public List<Employee> findAllEmployees()
