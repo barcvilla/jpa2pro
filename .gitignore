@@ -47,3 +47,4 @@
 /ch06/jpa-ch06-19-PersistingWithRelationshipsCascade/target/
 /ch06/jpa-ch06-20-RemovingWithRelationshipCascade/target/
 /ch06/jpa-ch06-21-mergingDetachedEntities/target/
+/ch06/jpa-ch06-22-detachmentWithTriggeredLazyLoading/target/
