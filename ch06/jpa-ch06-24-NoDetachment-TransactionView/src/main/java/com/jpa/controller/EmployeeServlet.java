@@ -18,7 +18,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.transaction.UserTransaction;
 
 /**
- *
+ * El contxto de persistencia creado por un entity manager transacction scope permanece abierto solo mientras la
+ * transaccion en la cual fue creada no ha terminado. por tanto, a fin de usar un entity manager transaction scope
+ * para ejecutar un query y ser capaz de renderizar  mientras resuelve la relacion lasy-loading ambas operaciones
+ * deben ser de la misma transaccion. 
+ * Cuando una transaccion es iniciada en la capa web e incluye ambos, session bean invocacion y jsp rendering antes de
+ * del commit, llamamos a este patrin Transaction View
  * @author PC
  */
 @WebServlet(name = "EmployeeServlet", urlPatterns = "/EmployeeServlet")
