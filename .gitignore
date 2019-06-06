@@ -51,3 +51,4 @@
 /ch06/jpa-ch06-23-detachmentWithEagerLoaging/target/
 /ch06/jpa-ch06-24-NoDetachment-TransactionView/target/
 /ch06/jpa-ch06-25-NoDetachmentAppManaged-EntityManager/target/
+/ch06/jpa-ch06-26-NoDetachmentSFSBAndExtendedEM/target/
