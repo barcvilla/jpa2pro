@@ -1,0 +1,11 @@
+MERGE STRATEGIES
+
+Una aplicacion que crea o actualiza informacion es una tarea muy comun. La estrategia mas comun para resolver un caso asi
+en una app Java EE que utiliza JPA es colocar los resultados de los cambios en una instancia de entidad detached (separada)
+y unir los cambios pendientes en un contexto de persistencia asi pudiendo ser escritas en la BD.
+
+Utilizando el patron Session Facade podemos realizar esta tarea. La entidad cambiada es actualizada y entregado a un
+stateless session bean para ser merged (unido). La unica complejidad involucrada es asegurarnos que la relacion sea correctamente
+merged mediante la indentificacion del caso donde la configuracion Merge es requerido
+
+
