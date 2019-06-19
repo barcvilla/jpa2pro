@@ -16,7 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
+ * Cuando una solicitud HttpRequest llega y empieza el editing session, crearemos un nuevo EmployeeEdit stateful session
+ * bean e invocamos el metodo begin() usando el id de la instancia employee que sera editado. El session bean luego carga
+ * la instancia del empleado en el bean. El bean luego es colocado en el Http Session  asi este puede ser accedido 
+ * nuevamente en subsecuentes solicitudes una vez que el usuario a cambiado la informacion del empleado.
+ * EmployeeEditServlet servlet que controla las Http request para iniciar una nueva editing session.
  * @author PC
  */
 @WebServlet(name = "EmployeeEditServlet", urlPatterns = "/EmployeeEditServlet")
@@ -35,7 +39,7 @@ public class EmployeeEditServlet extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp); //To change body of generated methods, choose Tools | Templates.
+        doPost(req, resp);
     }
     
     private int parseInt(String intString)

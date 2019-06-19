@@ -9,3 +9,18 @@ stateless session bean para ser merged (unido). La unica complejidad involucrada
 merged mediante la indentificacion del caso donde la configuracion Merge es requerido
 
 
+En el escenario de editing, podria ser visto como excesivo, pero este puede escalar a situaciones de edicion mas complejas.
+Department, Project y otra informacion pueden todos ser editado en una o incluso multiples sessions con el resultado 
+acumulado en el stateful session bean hasta que la app este lista para persistir los resultados.
+
+Otro beneficio es que el framework web JSF puede directamente acceder al bean alojado en el Http session desde
+dentro JSP page. La entiedad puede ser accedida tanto para mostrar el formulario para edicion y como el objetivo del 
+formulario cuando el usuario submit el resultado. en este escenario, el desarrollador solo tiene que asegurarse
+los metodos save y cancel son invocados en el punto correcto del flujo de la app
+
+Un par de punto adicionales que podemos mencionar sobre esta propuesta. Una vez alojado en el Http Session, el session
+bean permanecera alli hasta que este es explicitamente removido o el Http session expira. Es importante asegurarse que
+el bean ha sido removido una vez que la session de edicion es completada, la interface callback 
+HttpSessionBindingListening puede ser utilizado por la aplicacion para registrar cuando el Http session es destruido
+y limpiar al correspondiente session bean.
+

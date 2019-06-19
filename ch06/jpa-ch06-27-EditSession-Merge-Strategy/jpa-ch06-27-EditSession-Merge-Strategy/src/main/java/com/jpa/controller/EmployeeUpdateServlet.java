@@ -18,7 +18,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
+ * Miremos la segunda mitad del editing session, en la cual deseamos commit los cambios, cuando el usuario submit los 
+ * el formulario que contiene los cambios necesarios en el Employee, el EmployeeUpdateServlet es invocado. Este empieza
+ * recuperando el EmployeeEdit del HTTP Session. Los parametros request con los valores modificados son luego copiados
+ * a una instancia employee obtenido de la llamada al metodo getEmployee() en el bean EmployeeEdit, si todo esta en orden
+ * el metodo save() es invocado para escribir los cambios en la BD. 
  * @author PC
  */
 @WebServlet(name = "EmployeeUpdateServlet", urlPatterns = "/EmployeeUpdateServlet")
@@ -46,7 +50,7 @@ public class EmployeeUpdateServlet extends HttpServlet{
         {
             bean.cancel();
         }
-        
+        //removemos el bean del http session una vez que el editing session ha sido completado
         session.removeAttribute("employee.edit");
         
         request.setAttribute("employee", empService.findAll());
